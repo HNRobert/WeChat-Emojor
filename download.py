@@ -15,7 +15,7 @@ def find_fav_archive_file():
     home_dir = os.path.expanduser("~")
     search_pattern = os.path.join(
         home_dir,
-        "Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat/2.0b4.0.9/*/Stickers/fav.archive"
+        "Library/Containers/com.tencent.xinWeChat/Data/Library/Application Support/com.tencent.xinWeChat/*/*/Stickers/fav.archive"
     )
 
     # 查找匹配的文件
@@ -93,9 +93,8 @@ def main():
         logging.warning("No fav.archive files found.")
         return
     logging.info(f"Found fav.archive files:\n{files}")
-
     for filepath in files:
-        print(f"Processing file: {filepath}")
+        logging.info(f"Processing file: {filepath}")
         xml_file_path = copy_and_convert_to_xml(filepath)
         urls = extract_urls_from_xml(xml_file_path)
         download_files(urls)
